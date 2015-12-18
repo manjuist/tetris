@@ -1,0 +1,46 @@
+html *{margin: 0;padding: 0;}
+
+#gamearea {
+	width: 500px;
+	margin: 0 auto;
+	border: 1px solid #000;
+	overflow:hidden;
+	.consub{
+		margin: 10px;
+		height: 520px;
+		&.left{
+			float: left;
+			width: 356px;
+			height: 536px;
+			position:relative;
+			border: 1px solid #000;
+		}
+		&.right{
+			float: right;
+			width: 112px;
+			margin-left: 0;
+			height: 534px;
+		}
+	}
+}
+
+.option {
+	width: 500px;
+	height: 40px;
+	margin: 10px auto;
+	display: -webkit-flex;
+	display: -webkit-box;
+	display: flex;
+	border: 1px solid #000;
+	overflow:hidden;
+	.start,.pause,.reset {
+		float: left;
+		-webkit-flex: 1;
+		flex: 1;
+		text-align: center;
+		border: 1px solid #000;
+		line-height: 30px;
+		margin: 5px;
+		cursor: pointer;
+	}
+}
