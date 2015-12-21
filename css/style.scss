@@ -7,19 +7,14 @@ html *{margin: 0;padding: 0;}
 	overflow:hidden;
 	.consub{
 		margin: 10px;
-		height: 520px;
-		&.left{
+		width: 352px;
+		height: 528px;
+		border: 1px solid #000;
+		div{
 			float: left;
-			width: 356px;
-			height: 536px;
-			position:relative;
-			border: 1px solid #000;
-		}
-		&.right{
-			float: right;
-			width: 112px;
-			margin-left: 0;
-			height: 534px;
+			border:1px solid #ccc;
+			width: 20px;
+			height: 20px;
 		}
 	}
 }
