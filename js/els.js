@@ -1,8 +1,43 @@
 function els(){}
 
+//创建空矩阵
+var matrix = (function(){
+	var temp = [];
+	for(var i = 0; i < 24; i++){
+		temp.push(new Array(16));
+	}
+	return temp;
+}());
+
+//创建空元素
+var createElement = function(){
+	var div = document.createElement('div');
+	return div;
+};
+
+//创建有色元素
+var createRedElement = function(){
+	var div = document.createElement('div');
+	div.style.backgroundColor = els.color;
+	return div;
+};
+
+//将元素渲染至页面
+var render = function(matrix){
+	var box = document.getElementById('js-game');
+	var len = matrix.length;
+	for(var i = 0; i < len; i++){
+		for(var j = 0; j < 16; j++){
+			matrix[i][j] === 1?
+				box.appendChild(createRedElement()):
+				box.appendChild(createElement());
+		}
+	}
+};
+render(matrix);
+
 //形状数组
 els.ele = [[0x6600],[0x2222,0xf00],[0xc600,0x2640],[0x6c00,0x4620],[0x4460,0x2e0,0x6220,0x740],[0x2260,0xe20,0x6440,0x4700],[0x2620,0x720,0x2320,0x2700]];
-//形状数组结束
 
 //生成随机数
 els.random = function(min,max){
@@ -17,18 +52,16 @@ els.random = function(min,max){
 		}(len));
 	return parseInt(Math.random()*(num[1]-num[0]+1)+num[0]);
 };
-//生成随机数结束
 
 //颜色
 els.color = (function(){
 	var color = ['#0ff','#f0f','#ff0','#00f','#0f0','#f00','#000'];
 	return color[els.random(6)];
 }());
-//颜色结束
 
 //图形生成器
 els.shape = function(arr){
-	console.log(arr);
+	arr = arr || [];
 	var len = arr.length,
 	color = els.color;
 	for(var i = 0; i < len; i++){
@@ -41,7 +74,6 @@ els.shape = function(arr){
 		}
 	}
 };
-//图形生成器结束
 
 //事件
 var eventUtil = {
@@ -64,7 +96,6 @@ var eventUtil = {
 		}
 	}
 };
-//事件结束
 
 //选择器
 var get = function(selector){
@@ -82,7 +113,6 @@ var get = function(selector){
 		return;
 	}
 };
-//选择器结束
 
 //移动函数
 els.move = function(ele,orient){
@@ -106,9 +136,3 @@ els.move = function(ele,orient){
 		_ele.style.left = parseInt(document.defaultView?document.defaultView.getComputedStyle(_ele).left:_ele.currentStyle.left) - 30 + 'px';
 	}
 };
-//移动函数结束
-els.shape(els.ele[els.random(3)][els.random(1,4)]);
-
-//计时函数
-function aa(){ setTimeout(function(){},1000); }
-//计时函数结束
