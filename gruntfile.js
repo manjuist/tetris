@@ -70,5 +70,5 @@ module.exports = function(grunt){
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-browser-sync');
 	grunt.loadNpmTasks('grunt-postcss');
-	grunt.registerTask('default',['browserSync','watch']);
+	grunt.registerTask('default',['uglify','jshint','sass','csslint','postcss:dist','browserSync','watch']);
 };
