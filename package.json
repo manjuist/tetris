@@ -1,0 +1,46 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "tetris game",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manjuist/tetris.git"
+  },
+  "keywords": [
+    "tetris"
+  ],
+  "author": "deve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manjuist/tetris/issues"
+  },
+  "homepage": "https://github.com/manjuist/tetris#readme",
+  "devDependencies": {
+    "autoprefixer": "",
+    "bower": "^1.7.1",
+    "grunt": "",
+    "grunt-browser-sync": "",
+    "grunt-contrib-clean": "",
+    "grunt-contrib-compass": "",
+    "grunt-contrib-concat": "",
+    "grunt-contrib-connect": "",
+    "grunt-contrib-copy": "",
+    "grunt-contrib-csslint": "",
+    "grunt-contrib-htmlmin": "",
+    "grunt-contrib-imagemin": "",
+    "grunt-contrib-jshint": "",
+    "grunt-contrib-sass": "^0.9.2",
+    "grunt-contrib-uglify": "",
+    "grunt-contrib-watch": "",
+    "grunt-git": "",
+    "grunt-html-build": "",
+    "grunt-karma": "",
+    "grunt-notify": "",
+    "grunt-open": "",
+    "grunt-postcss": "^0.7.1"
+  }
+}
