@@ -1,6 +1,6 @@
 html *{margin: 0;padding: 0;}
 
-#gamearea {
+.gamearea {
 	width: 500px;
 	margin: 0 auto;
 	border: 1px solid #000;
@@ -28,14 +28,11 @@ html *{margin: 0;padding: 0;}
 	width: 500px;
 	height: 40px;
 	margin: 10px auto;
-	display: -webkit-flex;
-	display: -webkit-box;
 	display: flex;
 	border: 1px solid #000;
 	overflow:hidden;
 	.start,.pause,.reset {
 		float: left;
-		-webkit-flex: 1;
 		flex: 1;
 		text-align: center;
 		border: 1px solid #000;
