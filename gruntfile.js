@@ -55,6 +55,7 @@ module.exports = function(grunt){
 				src:['css/*.scss','*.html','js/*.js']
 			},
 			options:{
+				watchTask:true,
 				server:{
 					baseDir:'./'
 				}
