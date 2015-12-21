@@ -12,6 +12,7 @@ var matrix = (function(){
 //创建空元素
 var createElement = function(){
 	var div = document.createElement('div');
+	console.log(div);
 	return div;
 };
 
@@ -19,6 +20,7 @@ var createElement = function(){
 var createRedElement = function(){
 	var div = document.createElement('div');
 	div.style.backgroundColor = els.color;
+	console.log(div);
 	return div;
 };
 
@@ -34,6 +36,7 @@ var render = function(matrix){
 		}
 	}
 };
+matrix[0] = [1,0,1,0,1,1,1,1,1,0,0,0,1,1,1,1];
 render(matrix);
 
 //形状数组
