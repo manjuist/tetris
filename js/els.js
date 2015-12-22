@@ -58,10 +58,14 @@ var Shape = function(){
 	this.shape = els.ele[els.random(6)];
 	this.color = els.color();
 };
-	Shape.prototype.down = function(){};
-	Shape.prototype.left = function(){};
-	Shape.prototype.right = function(){};
-	Shape.prototype.isBorder = function(){};
+	Shape.prototype.down = function(){
+	};
+	Shape.prototype.left = function(){
+	};
+	Shape.prototype.right = function(){
+	};
+	Shape.prototype.isBorder = function(){
+	};
 
 //显示矩阵
 var show = {
