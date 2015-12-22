@@ -2,7 +2,9 @@ function els(){}
 
 //生成随机数
 els.random = function(min,max){
+	//获取参数个数
 	var len = Array.prototype.slice.call(arguments).length,
+		//根据参数个数决定随机数取值范围
 		num = (function(len){
 			var _num = {
 				'0':[0,1],
@@ -11,6 +13,7 @@ els.random = function(min,max){
 			};
 			return _num[len];
 		}(len));
+	//获取随机数
 	return parseInt(Math.random()*(num[1]-num[0]+1)+num[0]);
 };
 
@@ -55,22 +58,39 @@ els.ele = [
 
 //形状
 var Shape = function(){
+	//随机获取形状
 	this.shape = els.ele[els.random(6)];
 	this.color = els.color();
+	this.self = this;
 };
 	Shape.prototype.down = function(){
+		for(var i = 0; i < 4; i++){
+			this.shape[i][1] += 1;
+		}
+		show.render(show.matrix(this.self));
 	};
 	Shape.prototype.left = function(){
+		for(var i = 0; i < 4; i++){
+			this.shape[i][0] -= 1;
+		}
+		show.render(show.matrix(this.self));
 	};
 	Shape.prototype.right = function(){
+		for(var i = 0; i < 4; i++){
+			this.shape[i][0] += 1;
+		}
+		show.render(show.matrix(this.self));
 	};
 	Shape.prototype.isBorder = function(){
 	};
 
 //显示矩阵
 var show = {
+	//行
 	row:24,
+	//列
 	col:16,
+	//生成元素
 	element:function(color){
 		var div = document.createElement('div');
 		if(color){
@@ -82,18 +102,23 @@ var show = {
 	},
 	matrix:function(shape){
 		var temp = [];
+		//空矩阵
 		for(var i = 0; i < 24; i++){
 			temp.push(new Array(16));
 		}
 		if(shape){
+			//将形状插入矩阵
 			for(var j = 0; j < 4; j++){
 				temp[shape.shape[j][1]][shape.shape[j][0]+7] = 1;
 			}
 		}
+		//返回包含矩阵和形状的对象
 		return {matrix:temp,shape:shape || {}};
 	},
 	render:function(matrix){
 		var box = document.getElementById('js-game');
+		box.innerHTML = "";
+		//根据矩阵在页面输出
 		for(var i = 0; i < this.row; i++){
 			for(var j = 0; j < this.col; j++){
 				matrix.matrix[i][j] === 1?
@@ -101,5 +126,16 @@ var show = {
 					box.appendChild(this.element());
 			}
 		}
+		//返回包含矩阵和形状的对象，供后面位移函数使用
+		return matrix;
 	}
 };
+
+function init(){
+	var _shape = show.render(show.matrix(new Shape()));
+	var timer = setInterval(function(){
+		_shape.shape.down();
+	},1000);
+}
+init();
+
