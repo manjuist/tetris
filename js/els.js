@@ -46,8 +46,8 @@ els.eventUtil = {
 };
 
 els.eventUtil.addHandler(window,'keydown',function(e){
-	var e = e || event;
-	console.log(e.keyCode);
+	var event = e || event;
+	return event.keyCode;
 });
 
 //形状数组
@@ -66,14 +66,17 @@ var Shape = function(){
 	//随机获取形状
 	this.shape = els.ele[els.random(6)];
 	this.color = els.color();
-	this.self = this;
 };
+	Shape.prototype.self = function(){
+		return this;
+	};
 	Shape.prototype.down = function(){
+		console.log(this);
 		if(this.bottomBorder()){
 			for(var i = 0; i < 4; i++){
 				this.shape[i][1] += 1;
 			}
-			show.render(show.matrix(this.self));
+			show.render(show.matrix(this.self()));
 		}else{
 			clearInterval(timer);
 		}
@@ -82,13 +85,13 @@ var Shape = function(){
 		for(var i = 0; i < 4; i++){
 			this.shape[i][0] -= 1;
 		}
-		show.render(show.matrix(this.self));
+		show.render(show.matrix(this.self()));
 	};
 	Shape.prototype.right = function(){
 		for(var i = 0; i < 4; i++){
 			this.shape[i][0] += 1;
 		}
-		show.render(show.matrix(this.self));
+		show.render(show.matrix(this.self()));
 	};
 	Shape.prototype.leftBorder = function(){
 	};
@@ -102,7 +105,20 @@ var Shape = function(){
 		}
 		return true;
 	};
-	Shape.prototype.cell = function(){
+	Shape.prototype.rotate = function(){
+		var cx = Math.round((this.shape[0][0] + this.shape[1][0] + this.shape[2][0] + this.shape[3][0])/4);
+		var cy = Math.round((this.shape[0][1] + this.shape[1][1] + this.shape[2][1] + this.shape[3][1])/4);
+		for(var i = 0; i < 4; i++){
+			console.log(cx)
+			console.log(cy)
+			console.log(this.shape[i][0])
+			console.log(this.shape[i][1])
+			//this.shape[i][0] = cx - this.shape[i][1] + cy;
+			//this.shape[i][1] = cy + this.shape[i][0] - cx;
+			this.shape[i][1] = cx - this.shape[i][1] + cy;
+			this.shape[i][0] = cy + this.shape[i][0] - cx;
+		}
+		show.render(show.matrix(this.self()));
 	};
 
 //显示矩阵
