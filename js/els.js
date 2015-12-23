@@ -71,6 +71,7 @@ var Shape = function(){
 		return this;
 	};
 	Shape.prototype.down = function(){
+		console.log(this);
 		if(this.bottomBorder()){
 			for(var i = 0; i < 4; i++){
 				this.shape[i][1] += 1;
