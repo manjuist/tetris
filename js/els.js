@@ -71,7 +71,6 @@ var Shape = function(){
 		return this;
 	};
 	Shape.prototype.down = function(){
-		console.log(this);
 		if(this.bottomBorder()){
 			for(var i = 0; i < 4; i++){
 				this.shape[i][1] += 1;
@@ -109,12 +108,6 @@ var Shape = function(){
 		var cx = Math.round((this.shape[0][0] + this.shape[1][0] + this.shape[2][0] + this.shape[3][0])/4);
 		var cy = Math.round((this.shape[0][1] + this.shape[1][1] + this.shape[2][1] + this.shape[3][1])/4);
 		for(var i = 0; i < 4; i++){
-			console.log(cx)
-			console.log(cy)
-			console.log(this.shape[i][0])
-			console.log(this.shape[i][1])
-			//this.shape[i][0] = cx - this.shape[i][1] + cy;
-			//this.shape[i][1] = cy + this.shape[i][0] - cx;
 			this.shape[i][1] = cx - this.shape[i][1] + cy;
 			this.shape[i][0] = cy + this.shape[i][0] - cx;
 		}
