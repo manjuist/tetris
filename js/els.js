@@ -45,6 +45,11 @@ els.eventUtil = {
 	}
 };
 
+els.eventUtil.addHandler(window,'keydown',function(e){
+	var e = e || event;
+	console.log(e.keyCode);
+});
+
 //形状数组
 els.ele = [
 	[[0,0],[1,0],[0,1],[1,1]],
@@ -64,10 +69,14 @@ var Shape = function(){
 	this.self = this;
 };
 	Shape.prototype.down = function(){
-		for(var i = 0; i < 4; i++){
-			this.shape[i][1] += 1;
+		if(this.bottomBorder()){
+			for(var i = 0; i < 4; i++){
+				this.shape[i][1] += 1;
+			}
+			show.render(show.matrix(this.self));
+		}else{
+			clearInterval(timer);
 		}
-		show.render(show.matrix(this.self));
 	};
 	Shape.prototype.left = function(){
 		for(var i = 0; i < 4; i++){
@@ -81,16 +90,25 @@ var Shape = function(){
 		}
 		show.render(show.matrix(this.self));
 	};
-	Shape.prototype.isBorder = function(){
+	Shape.prototype.leftBorder = function(){
+	};
+	Shape.prototype.rightBorder = function(){
+	};
+	Shape.prototype.bottomBorder = function(){
+		for(var i = 0; i < 4; i++){
+			if(this.shape[i][1] >= show.row - 1){
+				return false;
+			}
+		}
+		return true;
+	};
+	Shape.prototype.cell = function(){
 	};
 
 //显示矩阵
 var show = {
-	//行
 	row:24,
-	//列
 	col:16,
-	//生成元素
 	element:function(color){
 		var div = document.createElement('div');
 		if(color){
@@ -102,7 +120,7 @@ var show = {
 	},
 	matrix:function(shape){
 		var temp = [];
-		//空矩阵
+		//矩阵
 		for(var i = 0; i < 24; i++){
 			temp.push(new Array(16));
 		}
@@ -131,11 +149,8 @@ var show = {
 	}
 };
 
-function init(){
-	var _shape = show.render(show.matrix(new Shape()));
-	var timer = setInterval(function(){
-		_shape.shape.down();
-	},1000);
-}
-init();
+var _shape = show.render(show.matrix(new Shape()));
+var timer = setInterval(function(){
+	_shape.shape.down();
+},1000);
 
