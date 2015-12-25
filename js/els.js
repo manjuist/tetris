@@ -76,10 +76,10 @@ var Shape = function(){
 		return this;
 	};
 	Shape.prototype.down = function(val){
-		var val = val || 1;
+		var value = val || 1;
 		if(this.bottomBorder()){
 			for(var i = 0; i < 4; i++){
-				this.shape[i][1] += val;
+				this.shape[i][1] += value;
 			}
 			show.render(show.matrix(this.self()));
 		}else{
