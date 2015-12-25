@@ -45,11 +45,16 @@ var eventUtil = {
 	}
 };
 
+//移动方向
 eventUtil.addHandler(window,'keydown',function(e){
 	var event = e || event;
 	switch(event.keyCode){
 		case 37:{
 			_shape.shape.left();
+			break;
+		}
+		case 38:{
+			_shape.shape.rotate();
 			break;
 		}
 		case 39:{
@@ -137,6 +142,7 @@ var show = {
 		}
 	},
 	matrix:function(shape){
+		console.log(shape);
 		var temp = [];
 		//return function(shape){
 			//矩阵
