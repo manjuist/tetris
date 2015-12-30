@@ -159,10 +159,10 @@
 			this.squre = temp;
 			return this;
 		}else{
-			for(var j = 0; j < 4; j++){
-				var a = this.theShape.squre[j][1];
-				var b = this.theShape.squre[j][0]+7;
-				m.matrix[a][b] = 1;
+			for(var m = 0; m < 4; m++){
+				var p = this.theShape.squre[m][1];
+				var q = this.theShape.squre[m][0]+7;
+				m.matrix[p][q] = 1;
 			}
 		}
 	};
