@@ -144,31 +144,41 @@
 		}
 		return temp;
 	};
-	Matrix.prototype.merge = function(){
-		var temp = extend(this.matrix);
-		if(this.theShape){
-			//将形状插入矩阵
+	Matrix.prototype.merge = function(matrix){
+		if(!matrix){
+			var temp = extend(this.matrix);
+			if(this.theShape){
+				//将形状插入矩阵
+				for(var j = 0; j < 4; j++){
+					var a = this.theShape.squre[j][1];
+					var b = this.theShape.squre[j][0]+7;
+					temp[a][b] = 1;
+				}
+			}
+			//返回包含矩阵和形状的对象
+			this.squre = temp;
+			return this;
+		}else{
 			for(var j = 0; j < 4; j++){
 				var a = this.theShape.squre[j][1];
 				var b = this.theShape.squre[j][0]+7;
-				temp[a][b] = 1;
+				m.matrix[a][b] = 1;
 			}
 		}
-		//返回包含矩阵和形状的对象
-		this.squre = temp;
-		return this;
 	};
 
 	//shape
 	var Shape = function(){
-		this.color = color();
+		this.color = "#000";
 		this.squre = ele[random(6)];
 	};
 	Shape.prototype.left = function(){
-		for(var i = 0; i < 4; i++){
-			this.squre[i][0] -= 1;
+		if(this.leftBorder()){
+			for(var i = 0; i < 4; i++){
+				this.squre[i][0] -= 1;
+			}
+			m.merge().render();
 		}
-		m.merge().render();
 	};
 	Shape.prototype.top = function(){
 		var cx = Math.round((this.squre[0][0] + this.squre[1][0] + this.squre[2][0] + this.squre[3][0])/4);
@@ -182,24 +192,62 @@
 		m.merge().render();
 	};
 	Shape.prototype.right = function(){
-		for(var i = 0; i < 4; i++){
-			this.squre[i][0] += 1;
+		if(this.rightBorder()){
+			for(var i = 0; i < 4; i++){
+				this.squre[i][0] += 1;
+			}
+			m.merge().render();
 		}
-		m.merge().render();
 	};
 	Shape.prototype.down = function(value){
 		var val = value || 1;
-		for(var i = 0; i < 4; i++){
-			this.squre[i][1] += val;
+		if(this.bottomBorder()){
+			for(var i = 0; i < 4; i++){
+				this.squre[i][1] += val;
+			}
+			m.merge().render();
+		}else{
+			clearInterval(timer);
+			m.merge(m.matrix);
+			init();
 		}
-		m.merge().render();
+	};
+	Shape.prototype.leftBorder = function(){
+		for(var i = 0; i < 4; i++){
+			if(this.squre[i][0] <= -7 ){
+				return false;
+			}
+		}
+		return true;
+	};
+	Shape.prototype.rightBorder = function(){
+		for(var i = 0; i < 4; i++){
+			if(this.squre[i][0] >= m.col - 8){
+				return false;
+			}
+		}
+		return true;
+	};
+	Shape.prototype.bottomBorder = function(){
+		for(var i = 0; i < 4; i++){
+			if(this.squre[i][1] >= m.row - 1){
+				return false;
+			}
+		}
+		return true;
+	};
+	Shape.prototype.allBorder = function(){
 	};
 	Shape.prototype.position = function(){
 	};
 	var m = new Matrix();
-	m.shape();
-	setInterval(function(){
-		m.merge().render();
-		m.theShape.down();
-	},1000);
+	var timer;
+	var init = function(){
+		m.shape();
+		timer = setInterval(function(){
+			m.merge().render();
+			m.theShape.down();
+		},1000);
+	};
+	init();
 }.call(window));
