@@ -159,9 +159,9 @@
 			this.squre = temp;
 			return this;
 		}else{
-			for(var m = 0; m < 4; m++){
-				var p = this.theShape.squre[m][1];
-				var q = this.theShape.squre[m][0]+7;
+			for(var n = 0; n < 4; n++){
+				var p = this.theShape.squre[n][1];
+				var q = this.theShape.squre[n][0]+7;
 				m.matrix[p][q] = 1;
 			}
 		}
