@@ -60,27 +60,24 @@
 	var extend = function copy(_old){
 		var _new = null;
 		if(_old.constructor === Object){
-			_new = {};
-			for(var key in _old){
-				if(_old[key].constructor === Object || _old[key].constructor === Array){
-					_new[key] = copy(_old[key]);
-				}else{
-					_new[key] = _old[key];
-				}
-			}
+		        _new = {};
+		        recursion(_old);
 		}else if(_old.constructor === Array){
 			_new = [];
-			for(var val in _old){
+		        recursion(_old);
+		}else{
+			_new = _old;
+		}
+	        function recursion(_old){
+	                for(var val in _old){
 				if(_old[val].constructor === Object || _old[val].constructor === Array){
 					_new[val] = copy(_old[val]);
 				}else{
 					_new[val] = _old[val];
 				}
 			}
-		}else{
-			_new = _old;
-		}
-		return _new;
+	        }
+	        return _new;
 	};
 
 	//移动方向
