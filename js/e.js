@@ -103,9 +103,6 @@
 		}
 	});
 
-	//形状数组
-	var ele = [ [[0,0],[1,0],[0,1],[1,1]], [[0,0],[0,1],[0,2],[0,3]], [[1,0],[2,0],[0,1],[1,1]], [[0,0],[1,0],[1,1],[2,1]], [[0,0],[1,0],[2,0],[2,1]], [[0,0],[1,0],[1,1],[1,2]], [[1,0],[0,1],[1,1],[1,2]] ];
-
 	//matrix
 	var Matrix = function(option){
 		var configure = option || {row:24,col:16};
@@ -166,8 +163,9 @@
 
 	//shape
 	var Shape = function(){
+		this.ele = [ [[0,0],[1,0],[0,1],[1,1]], [[0,0],[0,1],[0,2],[0,3]], [[1,0],[2,0],[0,1],[1,1]], [[0,0],[1,0],[1,1],[2,1]], [[0,0],[1,0],[2,0],[2,1]], [[0,0],[1,0],[1,1],[1,2]], [[1,0],[0,1],[1,1],[1,2]] ];
 		this.color = "#000";
-		this.squre = ele[random(6)];
+		this.squre = this.ele[random(6)];
 	};
 	Shape.prototype.left = function(){
 		if(this.leftBorder()){
@@ -241,6 +239,7 @@
 	var timer;
 	var init = function(){
 		m.shape();
+		console.log(m.theShape);
 		timer = setInterval(function(){
 			m.merge().render();
 			m.theShape.down();
