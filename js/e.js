@@ -105,11 +105,15 @@
 
 	//matrix
 	var Matrix = function(option){
+		//网格规模
 		var configure = option || {row:24,col:16};
 		this.row = configure.row;
 		this.col = configure.col;
-		this.squre = null;
+		//网格不停变换的临时状态
+		this.tempMatrix = null;
+		//新形状
 		this.theShape = null;
+		//网格最终状态
 		this.matrix = this.initMatrix();
 		this.needNew = false;
 	};
@@ -123,13 +127,14 @@
 		//根据矩阵在页面输出
 		for(var i = 0; i < this.row; i++){
 			for(var j = 0; j < this.col; j++){
-				this.squre[i][j] === 1?
+				this.tempMatrix[i][j] === 1?
 					box.appendChild(element(this.theShape.color)):
 					box.appendChild(element());
 			}
 		}
 		return this;
 	};
+	//初始化矩阵网格
 	Matrix.prototype.initMatrix = function(){
 		var temp = [];
 		//矩阵
@@ -138,19 +143,23 @@
 		}
 		return temp;
 	};
+	//将shape的坐标插入matrix
 	Matrix.prototype.merge = function(matrix){
 		if(!matrix){
 			var temp = extend(this.matrix);
 			if(this.theShape){
 				//将形状插入矩阵
 				for(var j = 0; j < 4; j++){
-					var a = this.theShape.squre[j][1];
-					var b = this.theShape.squre[j][0]+7;
-					temp[a][b] = 1;
+					//行
+					var y = this.theShape.squre[j][1];
+					//列（形状出现在中间，而不是最左侧）
+					var x = this.theShape.squre[j][0]+7;
+					//行，列
+					temp[y][x] = 1;
 				}
 			}
 			//返回包含矩阵和形状的对象
-			this.squre = temp;
+			this.tempMatrix = temp;
 			return this;
 		}else{
 			for(var n = 0; n < 4; n++){
@@ -227,19 +236,21 @@
 		for(var i = 0; i < 4; i++){
 			if(this.squre[i][1] >= m.row - 1){
 				return false;
+			}else if(m.matrix[this.squre[i][1]+1][this.squre[i][0]+7] === 1){
+				return false;
 			}
 		}
 		return true;
 	};
 	Shape.prototype.allBorder = function(){
-	};
+	}
 	Shape.prototype.position = function(){
 	};
 	var m = new Matrix();
 	var timer;
 	var init = function(){
+		console.log(m);
 		m.shape();
-		console.log(m.theShape);
 		timer = setInterval(function(){
 			m.merge().render();
 			m.theShape.down();
