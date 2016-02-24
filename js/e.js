@@ -122,16 +122,17 @@
 		return this;
 	};
 	Matrix.prototype.render = function(){
-		var box = document.getElementById('js-game');
 		box.innerHTML = "";
+		var tempBox = document.createDocumentFragment();
 		//根据矩阵在页面输出
 		for(var i = 0; i < this.row; i++){
 			for(var j = 0; j < this.col; j++){
 				this.tempMatrix[i][j] === 1?
-					box.appendChild(element(this.theShape.color)):
-					box.appendChild(element());
+					tempBox.appendChild(element(this.theShape.color)):
+					tempBox.appendChild(element());
 			}
 		}
+		box.appendChild(tempBox);
 		return this;
 	};
 	//初始化矩阵网格
@@ -167,6 +168,7 @@
 				var q = this.theShape.squre[n][0]+7;
 				m.matrix[p][q] = 1;
 			}
+			return this;
 		}
 	};
 
@@ -220,6 +222,8 @@
 		for(var i = 0; i < 4; i++){
 			if(this.squre[i][0] <= -7 ){
 				return false;
+			}else if(m.matrix[this.squre[i][1]][this.squre[i][0]+6] === 1){
+				return false;
 			}
 		}
 		return true;
@@ -228,7 +232,10 @@
 		for(var i = 0; i < 4; i++){
 			if(this.squre[i][0] >= m.col - 8){
 				return false;
+			}else if(m.matrix[this.squre[i][1]][this.squre[i][0]+8] === 1){
+				return false;
 			}
+
 		}
 		return true;
 	};
@@ -246,11 +253,24 @@
 	}
 	Shape.prototype.position = function(){
 	};
+	var box = document.getElementById('js-game');
 	var m = new Matrix();
 	var timer;
 	var init = function(){
-		console.log(m);
+		for(var i = m.matrix.length - 1; i >= 0; i--){
+			for(var ary = m.matrix[i],j,p = 0,n = 0; j = ary[p++];){
+				if(j === 1){
+					n += 1;
+				}
+			}
+			if(n === 16){
+				m.matrix.splice(i,1);
+				m.matrix.unshift(new Array(16));
+				i = m.matrix.length;
+			}
+		}
 		m.shape();
+		m.merge().render();
 		timer = setInterval(function(){
 			m.merge().render();
 			m.theShape.down();
