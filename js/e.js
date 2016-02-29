@@ -250,7 +250,7 @@
 		return true;
 	};
 	Shape.prototype.allBorder = function(){
-	}
+	};
 	Shape.prototype.position = function(){
 	};
 	var box = document.getElementById('js-game');
@@ -258,8 +258,9 @@
 	var timer;
 	var init = function(){
 		for(var i = m.matrix.length - 1; i >= 0; i--){
-			for(var ary = m.matrix[i],j,p = 0,n = 0; j = ary[p++];){
-				if(j === 1){
+			var  ary = m.matrix[i],n = 0;
+			for(var j = 0; j<ary.length; j++){
+				if(ary[j] === 1){
 					n += 1;
 				}
 			}
