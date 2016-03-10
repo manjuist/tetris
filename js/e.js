@@ -102,6 +102,23 @@
 			}
 		}
 	});
+	var status = 0;
+	eventUtil.addHandler(document.getElementsByClassName('start')[0],'click',function(e){
+		if(status == 0){
+			init();
+		}
+	});
+	eventUtil.addHandler(document.getElementsByClassName('pause')[0],'click',function(e){
+		if(status == 1){
+			status = 0
+			this.innerHTML="继续";
+			clearTimeout(timer);
+		}else{
+			status = 1
+			this.innerHTML="暂停";
+			timeout();
+		}
+	});
 
 	//matrix
 	var Matrix = function(option){
@@ -256,7 +273,14 @@
 	var box = document.getElementById('js-game');
 	var m = new Matrix();
 	var timer;
+	function timeout(){
+		timer = setInterval(function(){
+			m.merge().render();
+			m.theShape.down();
+		},1000);
+	}
 	var init = function(){
+		status = 1;
 		for(var i = m.matrix.length - 1; i >= 0; i--){
 			var  ary = m.matrix[i],n = 0;
 			for(var j = 0; j<ary.length; j++){
@@ -272,10 +296,6 @@
 		}
 		m.shape();
 		m.merge().render();
-		timer = setInterval(function(){
-			m.merge().render();
-			m.theShape.down();
-		},1000);
+		timeout();
 	};
-	init();
 }.call(window));
