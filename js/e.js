@@ -104,17 +104,17 @@
 	});
 	var status = 0;
 	eventUtil.addHandler(document.getElementsByClassName('start')[0],'click',function(e){
-		if(status == 0){
+		if(status === 0){
 			init();
 		}
 	});
 	eventUtil.addHandler(document.getElementsByClassName('pause')[0],'click',function(e){
-		if(status == 1){
-			status = 0
+		if(status === 1){
+			status = 0;
 			this.innerHTML="继续";
 			clearTimeout(timer);
 		}else{
-			status = 1
+			status = 1;
 			this.innerHTML="暂停";
 			timeout();
 		}
