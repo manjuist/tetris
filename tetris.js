@@ -144,9 +144,11 @@
 		//根据矩阵在页面输出
 		for(var i = 0; i < this.row; i++){
 			for(var j = 0; j < this.col; j++){
-				this.tempMatrix[i][j] === 1?
-					tempBox.appendChild(element(this.theShape.color)):
-					tempBox.appendChild(element());
+                if ( this.tempMatrix[i][j] === 1) {
+                    tempBox.appendChild(element(this.theShape.color));
+                } else {
+                    tempBox.appendChild(element());
+                }
 			}
 		}
 		box.appendChild(tempBox);
