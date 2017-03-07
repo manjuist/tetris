@@ -23,19 +23,26 @@ var baseConfig = {
 	dist:'dist/'
 };
 
-gulp.task('default',['style','webpack','pug','watch']);
+// gulp.task('default',['style','webpack','pug','watch']);
+gulp.task('default',['style','webpack','pug','browser-sync']);
 
 gulp.task('browser-sync',function(){
-	// //static
-	// browserSync.init({
-	// 	server:{
-	// 		baseDir:""
-	// 	}
-	// });
-	//proxy
+	//static
 	browserSync.init({
-		proxy:"dev.mlamp.co"
+		server:{
+			baseDir:"dist/"
+		}
 	});
+	// // proxy
+	// browserSync.init({
+	// 	proxy:"dev.mlamp.co"
+	// });
+	gulp.watch(baseConfig.src.js,['webpack']);
+	gulp.watch(baseConfig.src.style,['style']);
+	gulp.watch(baseConfig.src.html,['pug']);
+	gulp.watch(baseConfig.dist+'js/*.js').on('change',reload);
+	gulp.watch(baseConfig.dist+'style/*.css').on('change',reload);
+	gulp.watch(baseConfig.dist+'html/*.html').on('change',reload);
 });
 
 gulp.task('clean',function(){

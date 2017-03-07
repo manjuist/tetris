@@ -3,6 +3,7 @@ var webpack = require("webpack");
 var path = require("path");
 
 const config = {
+    devtool:'cheap-module-source-map',
 	// 插件项
 	// plugins:[commonsPlugin],
 	// 页面入口
