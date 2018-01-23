@@ -1,18 +1,19 @@
 var webpack = require("webpack");
 // var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('common.js');
 var path = require("path");
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+console.log(__dirname)
 const config = {
-    devtool:'cheap-module-source-map',
+    devtool:'source-map',
 	// 插件项
-	// plugins:[commonsPlugin],
 	// 页面入口
 	entry:{
-		main:'./src/js/index.js'
+		main:'./src/index.js'
 	},
 	// 文件输出
 	output:{
-		path:path.resolve(__dirname,'dist/js'),
+		path:path.resolve(__dirname,'dist'),
 		filename:'[name].js'
 	},
 	module:{
@@ -21,21 +22,15 @@ const config = {
 			{
 				test:/\.(js|jsx)$/,
 				loader:'babel-loader'
-			},
-			// {
-			// 	test:/\.css$/,
-			// 	loader:'style-loader!css-loader'
-			// },
-			// {
-			// 	test:/\.scss$/,
-			// 	loader:'style-loader!css-loader!sass-loader?sourceMap'
-			// },
-			{
-				test:/\.(png|jpg)$/,
-				loader:'url-loader?limit=8192'
 			}
 		]
-	}
+	},
+	plugins:[
+        new HtmlWebpackPlugin({
+            title:'index',
+            template:'template/index.ejs'
+        })
+    ]
 }
 
 module.exports = config;
