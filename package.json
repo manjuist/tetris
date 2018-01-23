@@ -24,13 +24,8 @@
     "browser-sync": "^2.18.5",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
-    "gulp-postcss": "^6.2.0",
-    "gulp-pug": "^3.2.0",
-    "gulp-sass": "^3.0.0",
-    "gulp-sourcemaps": "^1.9.1",
     "gulp-util": "^3.0.7",
     "html-webpack-plugin": "^2.30.1",
-    "url-loader": "^0.5.7",
     "webpack": "^1.14.0"
   }
 }
