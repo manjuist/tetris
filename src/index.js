@@ -74,27 +74,31 @@
         return _new;
     };
 
+    function moveOrigin(keyCode){
+        switch(keyCode){
+            case 37:{
+                m.theShape.left();
+                break;
+            }
+            case 38:{
+                m.theShape.top();
+                break;
+            }
+            case 39:{
+                m.theShape.right();
+                break;
+            }
+            case 40:{
+                m.theShape.down();
+                break;
+            }
+        }
+    }
     //移动方向
     eventUtil.addHandler(window,'keydown',function(e){
         var event = e || event;
-        switch(event.keyCode){
-        case 37:{
-            m.theShape.left();
-            break;
-        }
-        case 38:{
-            m.theShape.top();
-            break;
-        }
-        case 39:{
-            m.theShape.right();
-            break;
-        }
-        case 40:{
-            m.theShape.down();
-            break;
-        }
-        }
+        var keyCode = event.keyCode
+        moveOrigin(keyCode)
     });
 
     var status = 0;
