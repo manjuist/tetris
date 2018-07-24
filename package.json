@@ -4,7 +4,8 @@
   "description": "tetris",
   "main": "index",
   "scripts": {
-    "start": "tsc index.ts"
+    "start": "tsc index.ts",
+    "bundle": "webpack"
   },
   "repository": {
     "type": "git",
@@ -15,8 +16,11 @@
   ],
   "author": "Deve",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-loader": "^7.1.5",
+    "typescript": "^2.9.2",
+    "webpack": "^4.16.2"
+  },
   "dependencies": {
-    "typescript": "^2.9.2"
   }
 }
