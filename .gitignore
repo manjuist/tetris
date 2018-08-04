@@ -3,3 +3,5 @@
 *.*~
 *.un~
 /dist
+.DS_Store
+index.js

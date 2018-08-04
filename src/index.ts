@@ -40,9 +40,14 @@
     };
 
     //element
-    var element = function(){
+    var element = function(color){
         var div = document.createElement('div');
-        return div;
+        if(color){
+            div.style.backgroundColor = color;
+            return div;
+        }else{
+            return div;
+        }
     };
 
     //extend
@@ -142,9 +147,9 @@
         for(var i = 0; i < this.row; i++){
             for(var j = 0; j < this.col; j++){
                 if ( this.tempMatrix[i][j] === 1) {
-                    tempBox.appendChild(element());
+                    tempBox.appendChild(element('#000'));
                 } else {
-                    tempBox.appendChild(element());
+                    tempBox.appendChild(element(''));
                 }
             }
         }
