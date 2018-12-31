@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
     // Change to your "entry-point".
-    entry: './src/index',
+    entry: './src/index.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.bundle.js'
@@ -12,10 +12,13 @@ module.exports = {
     },
     module: {
         rules: [{
-            // Include ts, tsx, and js files.
-            test: /\.(tsx?)|(js)$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
         }],
+    },
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'),
+        compress: true,
+        port: 9000,
     }
 };

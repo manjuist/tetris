@@ -5,7 +5,7 @@
   "main": "index",
   "scripts": {
     "start": "tsc index.ts",
-    "bundle": "webpack"
+    "bundle": "webpack --mode=development"
   },
   "repository": {
     "type": "git",
@@ -17,10 +17,11 @@
   "author": "Deve",
   "license": "MIT",
   "devDependencies": {
-    "babel-loader": "^7.1.5",
-    "typescript": "^2.9.2",
-    "webpack": "^4.16.2"
+    "typescript": "3.2.2",
+    "webpack": "4.28.3",
+    "webpack-cli": "3.1.2"
   },
   "dependencies": {
+    "ts-loader": "5.3.2"
   }
 }
