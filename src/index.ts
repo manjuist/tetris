@@ -1,3 +1,5 @@
+import './index.scss'
+
 (function(){
     'use strict';
     //生成随机数

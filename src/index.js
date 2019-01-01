@@ -1,3 +1,6 @@
+"use strict";
+exports.__esModule = true;
+require("./index.scss");
 (function () {
     'use strict';
     //生成随机数
