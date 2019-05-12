@@ -1,12 +1,15 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     // Change to your "entry-point".
-    entry: './src/index.ts',
+    entry: {
+        index:'./src/index.ts'
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'app.js'
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json']
@@ -17,7 +20,13 @@ module.exports = {
             loader: 'ts-loader',
         },{
             test:/\.(css|scss)$/,
-            use: ['style-loader','css-loader','sass-loader']
+            use: [
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                },
+                'css-loader',
+                'sass-loader'
+            ]
         }],
     },
     devServer: {
@@ -28,7 +37,12 @@ module.exports = {
     plugins:[ 
         new HtmlWebpackPlugin({
                     title:'index',
+                    inject:true,
                     template:'src/index.html'
                 }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[name].css'
+        }),
         ]
 };
